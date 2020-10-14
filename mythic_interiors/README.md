@@ -1,3 +1,13 @@
+# Mythic Interiors
+
+### Exile Role Play
+
+**Mevcut Versiyon:** 1.0
+**Edited:** Virtuosite, Cynydlan
+**Son Düzenleme:** 14-10-2020
+
+***
+
 # Mythic Interiors - WIP
 This is the basic frameworking for the spawnable interiors. Call any of the functions passing a spawn point and it will spawn objects there and then teleport the player.
 
