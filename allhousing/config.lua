@@ -2,8 +2,8 @@ Config = {
   Locale      = 'en',
   Debug       = false,
 
-  UseMLO      = true,  -- MLO support?
-  UseDoors    = true,  -- Can be paired with MLO support, must have "ModFreakz: Doors" mod from https://modit.store
+  UseMLO      = false,  -- MLO support?
+  UseDoors    = false,  -- Can be paired with MLO support, must have "ModFreakz: Doors" mod from https://modit.store
 
   AllowHouseSales = true,                   -- can players sell their house after purchase?
   SpawnOffset     = vector3(0.0,0.0,0.0),   -- global house spawn offset (location + SpawnOffset) (use negative z-value to lower the shells position)
@@ -47,13 +47,13 @@ Config = {
   InteractDistance  = 2.0,  
 
   -- Allow house owners to move their garage?
-  AllowGarageMovement = true,
+  AllowGarageMovement = false,
 
   -- Allow players to have X number of houses? False if unlimited.
   RestrictHouseCount = 5,
 
   -- MORTGAGE BS
-  AllowMortgage         = true,
+  AllowMortgage         = false,
   MortgagePercent       = 10,
   MortgageMinRepayment  = 10,
 
@@ -123,7 +123,7 @@ Config = {
 
   HideOwnBlips    = false,    -- hide blips for players owned houses?
   HideSoldBlips   = false,    -- hide blips for other player houses?
-  HideEmptyBlips  = false,    -- hide blips for empty houses/for sale houses?
+  HideEmptyBlips  = true,    -- hide blips for empty houses/for sale houses?
 
   -- OWNER STUFF  
   RemoveFurniture  = true,  -- Remove all furniture on sale.
@@ -140,8 +140,8 @@ Config = {
   LockpickFailChance        = 5,            -- % failure chance, if not using minigames for lockpicking.
   LockpickTime              = 3,            -- seconds to lockpick, if not using minigames for lockpicking.
 
-  UsingLockpickV1     = true,          -- if using MF_Lockpicking (free with this mod).
-  UsingLockpickV2     = false,         -- if using MF_Lockpicking V2 (on modit.store). NOTE: Can only use either V1 or V2.
+  UsingLockpickV1     = false,          -- if using MF_Lockpicking (free with this mod).
+  UsingLockpickV2     = true,         -- if using MF_Lockpicking V2 (on modit.store). NOTE: Can only use either V1 or V2.
   UsingProgressBars   = false,         -- if not using either lockpicking versions, and want to use progress bars while performing lockpick animation.
 
   -- JOB STUFF
