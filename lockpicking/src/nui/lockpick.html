@@ -1,0 +1,292 @@
+<html>
+
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <style>
+      body {
+        position: absolute;
+        width: 50%;
+
+        left: 50%;
+        top: 50%;
+
+        display: block;
+
+        overflow: hidden;
+      }
+
+      #barrel-img {
+        position: absolute;
+        width: 400px;
+        height: 400px;
+
+        left: calc(50% - 200px);
+        top: calc(50% - 200px);
+
+        background-image: url('barrel.png');
+      }
+
+      #lockpick-img {
+        position: absolute;
+        width: 700px;
+        height: 50px;
+
+        left: -576px;
+        top: calc(50% + 80px);
+
+        background-image: url('lockpick.png');
+        background-repeat: no-repeat;
+      }
+
+      .bullet-img {
+        position: absolute;
+        width: 23px;
+        height: 98px;
+
+        background-image: url('bullet.png');
+        top: 190px;
+
+        opacity: 0.5;
+      }
+
+      #bullet1 {
+        left: 70px;
+      }
+
+      #bullet2 {
+        left: 126px;
+      }
+
+      #bullet3 {
+        left: 182px;
+      }
+
+      #bullet4 {
+        left: 239px;
+      }
+
+      #bullet5 {
+        left: 295px;
+      }
+    </style>
+  </head>
+
+  <body id="body">
+    <div id="barrel-img">
+      <div id="bullet1" class="bullet-img"></div>
+      <div id="bullet2" class="bullet-img"></div>
+      <div id="bullet3" class="bullet-img"></div>
+      <div id="bullet4" class="bullet-img"></div>
+      <div id="bullet5" class="bullet-img"></div>
+      <div id="lockpick-img"></div>
+    </div>
+  </body>
+
+  <script type="text/javascript">
+    var lastRender     = 0;
+    var doUpdate       = false;
+
+    var tickTarget     = 150;
+
+    var longWaitTime   = 10;
+    var shortWaitTime  = 1;
+    var bulletMovement = 20;
+    var bulletDropper  = 0.5;
+
+    var selectedBullet = 1;
+
+    var barrel = document.getElementById('barrel-img');
+    var lockpick = document.getElementById('lockpick-img');
+    var bullets = {};
+    var targets = {};
+
+    var state = {
+      pressedKeys: {
+        left: false,
+        right: false,
+        up: false,
+        down: false
+      }
+    }
+
+    var keyMap = {
+      68: 'right',
+      65: 'left',
+      87: 'up',
+      83: 'down',
+      27: 'quit',
+    }
+
+    var lockpickPositions = {
+      [1]:-10,
+      [2]:52,
+      [3]:107,
+      [4]:164,
+      [5]:220,
+    }
+
+    for (var key=1;key<6;key++) { bullets[key] = document.getElementById('bullet'+key); bullets[key].tick = 0; }
+    for (var key=1;key<6;key++) { targets[key] = RandomInt(50)+100; }
+    var bulletStartPos = bullets[1].getBoundingClientRect().top - barrel.getBoundingClientRect().top;
+    var lockpickStartPos = lockpick.getBoundingClientRect().top - barrel.getBoundingClientRect().top;
+
+    function PushBullet(key) {     
+      if (!bullets[key].locked) { 
+        var maxPos = bulletStartPos - 100;
+        var curPos = bullets[key].getBoundingClientRect().top - barrel.getBoundingClientRect().top;
+        bullets[key].style.top = Math.max(maxPos,curPos - bulletMovement);
+      };
+    }    
+
+    function RandomInt(max) {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+
+
+    function keydown(event) {
+      if (doUpdate == true) {
+        var key = keyMap[event.keyCode];
+        if (key != "quit") {
+          state.pressedKeys[key] = true;
+        } else {
+          Quit();
+        }
+      }
+    }
+
+    function keyup(event) {
+      if (doUpdate == true) {
+        var key = keyMap[event.keyCode];
+        if (key != "quit") {
+          state.pressedKeys[key] = false;
+        } else {
+          Quit();
+        }
+      }
+    }
+
+    function DropBullet(key) {
+      var minPos = bulletStartPos;
+      var curPos = bullets[key].getBoundingClientRect().top - barrel.getBoundingClientRect().top;
+      if (curPos < bulletStartPos) {
+        if (!bullets[key].locked) {
+          var distance = 1.0 - (Math.abs(targets[key] - (curPos + bulletDropper))/100.0);
+          bullets[key].style.opacity = Math.max(0.3,Math.min(1.0,distance));
+          bullets[key].style.top = Math.min(minPos,curPos + bulletDropper); 
+          if (distance > 0.7) {
+            bullets[key].tick = bullets[key].tick + 1;
+            if (bullets[key].tick >= tickTarget) {
+              bullets[key].locked = true;
+              bullets[key].opacity = 1.0;
+              CheckVictory();
+            }
+          } else {
+            bullets[key].tick = 0;
+          }        
+        } else {
+          if (bullets[key].opacity != 1.0) { bullets[key].opacity = 1.0; }
+        }
+      }  
+    }
+
+    function CheckVictory() {
+      var count = 0;
+      for (var k=1;k<6;k++) {
+        var bullet = bullets[k];
+        if (bullet.locked) {
+          count++;
+        }
+      }
+      if (count >= 5) {
+        doUpdate = false;
+        setTimeout(function() {
+          $.post('https://lockpick/Finished');
+          document.body.style.display = "none";  
+        },1000)
+      }
+    }
+
+    function Quit() { 
+      $.post('https://lockpick/Quit');   
+      document.body.style.display = "none";  
+    }
+
+    function MoveLockpick(key) {
+      var max = lockpickStartPos + lockpickPositions[5];
+      var targetPos = lockpickStartPos + lockpickPositions[key];
+      var pos = Math.min(max,targetPos)-850;
+      lockpick.style.left = pos;
+    }
+
+    function Update(progress) {
+      for (var key=1;key<6;key++) {
+        DropBullet(key);
+      }
+
+      var keyPressed = false;
+      if (state.pressedKeys.left) {
+        selectedBullet = Math.max(1,selectedBullet - 1);
+        MoveLockpick(selectedBullet);
+        state.pressedKeys.left = false;
+      }
+      if (state.pressedKeys.right) {
+        selectedBullet = Math.min(5,selectedBullet + 1);
+        MoveLockpick(selectedBullet);
+        state.pressedKeys.right = false;
+      }
+      if (state.pressedKeys.up) {
+        PushBullet(selectedBullet);
+        state.pressedKeys.up = false;
+        $("#lockpick-img").css("transform", "rotate(-2deg)");
+        setTimeout(function() {
+          $("#lockpick-img").css("transform", "rotate(0deg)");
+        },100);        
+      }
+    }
+
+    function Ticker(timestamp) {      
+      var progress = timestamp - lastRender
+
+      Update(progress);
+      lastRender = timestamp;
+
+      if (doUpdate == true) {
+        window.requestAnimationFrame(Ticker)
+      }
+    }
+
+    function StartMinigame() {
+      document.body.style.display = "block"; 
+      for (var key=1;key<6;key++) { bullets[key].tick = 0; bullets[key].locked = false; }
+      for (var key=1;key<6;key++) { targets[key] = RandomInt(50)+100; }
+      MoveLockpick(1);
+      selectedBullet = 1;
+      doUpdate = true;
+      var minPos = bulletStartPos;
+      for (var key=1;key<6;key++) {
+        bullets[key].style.opacity = 0.3;
+        bullets[key].style.top = minPos; 
+      }
+      window.requestAnimationFrame(Ticker);      
+    }
+
+    funcs = {
+      "StartMinigame":StartMinigame,
+      "Quit":Quit,
+    }
+
+    document.body.style.display = "none";
+
+    window.addEventListener("message", function(event) {
+      if (event.data.func) {
+        funcs[event.data.func]();
+      }
+    })
+
+    window.addEventListener("keydown", keydown, false)
+    window.addEventListener("keyup", keyup, false)
+
+    //StartMinigame()
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</html>
