@@ -15,4 +15,4 @@
 ]]
 
 Credentials = {}
-Credentials.Token = "CHANGE_ME"
+Credentials.Token = "MMMVX2JMEK6AFE06"

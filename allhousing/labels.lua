@@ -1,13 +1,13 @@
 local labels = {
   ['en'] = {
-    ['Entry']       = "Entry",
-    ['Exit']        = "Exit",
-    ['Garage']      = "Garage",
+    ['Entry']       = "Giriş",
+    ['Exit']        = "Çıkış",
+    ['Garage']      = "Garaj",
     ['Wardrobe']    = "Wardrobe",
     ['Inventory']   = "Inventory",
     ['InventoryLocation']   = "Inventory",
 
-    ['LeavingHouse']      = "Leaving house",
+    ['LeavingHouse']      = "Evden ayrıl",
 
     ['EquipOutfit']       = "Equip Outfit",
     ['DeleteOutfit']      = "Delete Outfit",
@@ -34,8 +34,8 @@ local labels = {
 
     ['TrackMessage']      = "Track message",
 
-    ['Unlocked']          = "House unlocked",
-    ['Locked']            = "House locked",
+    ['Unlocked']          = "Ev kilitsiz",
+    ['Locked']            = "Ev kilitli",
 
     ['WardrobeSet']       = "Wardrobe set",
     ['InventorySet']      = "Inventory set",
@@ -45,8 +45,8 @@ local labels = {
     ['GivingKeys']        = "Giving keys to player",
     ['TakingKeys']        = "Taking keys from player",
 
-    ['GarageSet']         = "Garage location set",
-    ['GarageTooFar']      = "Garage is too far away",
+    ['GarageSet']         = "Garaj yerini seç",
+    ['GarageTooFar']      = "Garaj çok uzakta",
 
     ['PurchasedHouse']    = "You bought the house for $%d",
     ['CantAffordHouse']   = "You can't afford this house",
@@ -65,54 +65,54 @@ local labels = {
     ['ShellNotLoaded']      = "Shell would not load: %s, please report to your server owner.",
     ['BrokenOffset']        = "Offset is messed up for house with ID %s, please report to your server owner.",
 
-    ['UpgradeHouse']        = "Upgrade house to: %s",
+    ['UpgradeHouse']        = "Ev Upgrade: %s",
     ['CantAffordUpgrade']   = "You can't afford this upgrade",
 
-    ['SetSalePrice']        = "Set sale price",
+    ['SetSalePrice']        = "Satış fiyatı belirleyin",
     ['InvalidAmount']       = "Invalid amount entered",
     ['InvalidSale']         = "You can't sell a house that you still owe money on",
-    ['InvalidMoney']        = "You don't have enough money",
+    ['InvalidMoney']        = "Yeteri kadar paranız yok",
 
     ['EvictingTenants']     = "Evicting tenants",
 
-    ['NoOutfits']           = "You don't have any outfits stored",
+    ['NoOutfits']           = "Herhangi bir kayıtlı outfit yok",
 
-    ['EnterHouse']          = "Enter House",
-    ['KnockHouse']          = "Knock On Door",
+    ['EnterHouse']          = "Eve Gir",
+    ['KnockHouse']          = "Kapıyı Çal",
     ['RaidHouse']           = "Raid House",
     ['BreakIn']             = "Break In",
-    ['InviteInside']        = "Invite Inside",
-    ['HouseKeys']           = "House Keys",
+    ['InviteInside']        = "İçeri Davet Et",
+    ['HouseKeys']           = "Ev Anahtarları",
     ['UpgradeHouse2']       = "Upgrade House",
     ['UpgradeShell']        = "Upgrade Shell",
-    ['SellHouse']           = "Sell House",
+    ['SellHouse']           = "Evi Sat",
     ['FurniUI']             = "Furni UI",
     ['SetWardrobe']         = "Set Wardrobe",
     ['SetInventory']        = "Set Inventory",
-    ['SetGarage']           = "Set Garage",
-    ['LockDoor']            = "Lock House",
-    ['UnlockDoor']          = "Unlock House",
-    ['LeaveHouse']          = "Leave House",
+    ['SetGarage']           = "Garajı Belirle",
+    ['LockDoor']            = "Evi Kilitle",
+    ['UnlockDoor']          = "Ev Kilit Aç",
+    ['LeaveHouse']          = "Evden Ayrıl",
     ['Mortgage']            = "Mortgage",
-    ['Buy']                 = "Buy",
+    ['Buy']                 = "Satın Al",
     ['View']                = "View",
     ['Upgrades']            = "Upgrades",
-    ['MoveGarage']          = "Move Garage",
+    ['MoveGarage']          = "Garajı Taşı",
 
     ['GiveKeys']            = "Give Keys",
     ['TakeKeys']            = "Take Keys",
 
-    ['MyHouse']             = "My House",
-    ['PlayerHouse']         = "Player House",
-    ['EmptyHouse']          = "Empty House",
+    ['MyHouse']             = "Evim",
+    ['PlayerHouse']         = "Oyuncu Evi",
+    ['EmptyHouse']          = "Boş Ev",
 
     ['NoUpgrades']          = "No upgrades available",
     ['NoVehicles']          = "No vehicles",
     ['NothingToDisplay']    = "Nothing to display",
 
-    ['ConfirmSale']         = "Yes, sell my house",
-    ['CancelSale']          = "No, don't sell my house",
-    ['SellingHouse']        = "Sell House ($%d)",
+    ['ConfirmSale']         = "Evet, evimi sat",
+    ['CancelSale']          = "Hayır, satmak istemiyorum",
+    ['SellingHouse']        = "Evi Sat ($%d)",
 
     ['MoneyOwed']           = "Money Owed: $%s",
     ['LastRepayment']       = "Last Repayment: %s",
@@ -131,11 +131,11 @@ local labels = {
     ['Enabled']             = "~g~ENABLED~s~",
     ['Disabled']            = "~r~DISABLED~s~",
     ['NewDoor']             = "Add New Door",
-    ['Done']                = "Done",
-    ['Doors']               = "Doors",
+    ['Done']                = "Tamam",
+    ['Doors']               = "Kapılar",
     ['Interior']            = "Interior",
 
-    ['CreationComplete']    = "House creation complete.",
+    ['CreationComplete']    = "Ev oluşturma tamamlandı.",
 
     ['HousePurchased'] = "Your house was purchased for $%d",
     ['HouseEarning']   = ", you earnt $%d from the sale."

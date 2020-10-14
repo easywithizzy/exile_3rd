@@ -49,7 +49,7 @@ dependencies {
   'es_extended',
 
   -- COMMENT OUT IF NOT USING NATIVEUI
-  'NativeUILua_Reloaded',
+  -- 'NativeUI',
 
   'mysql-async',
   'input',

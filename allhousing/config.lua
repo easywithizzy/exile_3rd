@@ -20,8 +20,8 @@ Config = {
   UsingInteractSound = false,
 
   -- MENUS
-  UsingESXMenu      = false,
-  UsingNativeUI     = true,
+  UsingESXMenu      = true,
+  UsingNativeUI     = false,
 
   UseHouseInventory = true, -- if using the inventory inside of houses.
 
@@ -29,7 +29,7 @@ Config = {
   -- Refer to this when you receive the error for line 118 in framework_functions.
   -- It means you either set UsingESX_V1.2.0 incorrectly, or you've set your account names incorrectly.
   ["UsingKashacters"]   = false,           -- are you using esx_kashacters?
-  ["UsingESX_V1.2.0"]   = false,          -- self explainatory. True if newer aswell.
+  ["UsingESX_V1.2.0"]   = true,          -- self explainatory. True if newer aswell.
   ["BankAccountName"]   = "bank",
   ["DirtyAccountName"]  = "black_money",
   ["CashAccountName"]   = "money",        -- ignore if not using esx v.1.2 + 
